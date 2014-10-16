@@ -1,23 +1,23 @@
 FluentZpl
 =========
 
-A fluent interface to build labels using ZPL
+<h2>A fluent interface to build labels using ZPL</h2>
 
 FluentZpl consists of an assembly called ZplLabels that allows creation and printing of Zebra labels through a fluent interface. The ZplLabel class enables creation of label scripts through its Load() method, and either PrinterConnection or LabelPrinter can be used to send the resulting script to a Zebra printer.
 
 The ZplLabel.Load() method takes an array of IFieldGenerator objects as parameters.  The field generators are created through static methods of the ZplFactory class. 
 
-Creating a text field:
+<h2>Creating a text field:</h2>
 
-ZplFactory.TextField().At(1, 500).SetFont(Fonts.D, FieldOrientation.Normal, 56).WithData("PO Line Number").Centered(1200)
+<pre>ZplFactory.TextField().At(1, 500).SetFont(Fonts.D, FieldOrientation.Normal, 56).WithData("PO Line Number").Centered(1200)
+</pre>
+<h2>Creating a barcode field:</h2>
+<pre>
+ ZplFactory.BarcodeField().At(1, 550).SetBarcodeType(BarcodeType.Code128).SetFont(Fonts.D, FieldOrientation.Normal, 40).WithData("1").Height(70).BarWidth(2).Centered(1200) </pre>
 
-Creating a barcode field:
+<h2>To create a complete label:</h2>
 
- ZplFactory.BarcodeField().At(1, 550).SetBarcodeType(BarcodeType.Code128).SetFont(Fonts.D, FieldOrientation.Normal, 40).WithData("1").Height(70).BarWidth(2).Centered(1200) 
-
-To create a complete label:
-
-var label  = _label.Load(ZplFactory.TextField().At(1, 150).SetFont(Fonts.D, FieldOrientation.Normal, 84).WithData("PO Number").Centered(1200).Underline(),
+<pre>var label  = _label.Load(ZplFactory.TextField().At(1, 150).SetFont(Fonts.D, FieldOrientation.Normal, 84).WithData("PO Number").Centered(1200).Underline(),
                 ZplFactory.BarcodeField().At(1, 250).SetBarcodeType(BarcodeType.Code128).SetFont(Fonts.D, FieldOrientation.Normal, 48).WithData("22343").Height(150).BarWidth(4).Centered(1200),
                 ZplFactory.TextField().At(1, 500).SetFont(Fonts.D, FieldOrientation.Normal, 56).WithData("PO Line Number").Centered(1200),
                 ZplFactory.BarcodeField().At(1, 550).SetBarcodeType(BarcodeType.Code128).SetFont(Fonts.D, FieldOrientation.Normal, 40).WithData("1").Height(70).BarWidth(2).Centered(1200),
@@ -27,9 +27,10 @@ var label  = _label.Load(ZplFactory.TextField().At(1, 150).SetFont(Fonts.D, Fiel
                 ZplFactory.BarcodeField().At(1, 1120).SetBarcodeType(BarcodeType.Code128).SetFont(Fonts.D, FieldOrientation.Normal, 48).WithData("10000000006898").BarWidth(4).Height(110).Centered(1200),
                 ZplFactory.TextField().At(1, 1320).SetFont(Fonts.B, FieldOrientation.Inverted, 64).WithData("QTY").Centered(1200),
                 ZplFactory.BarcodeField().At(1, 1400).SetBarcodeType(BarcodeType.Code128).SetFont(Fonts.D, FieldOrientation.Inverted, 72).WithData("10").BarWidth(4).Height(150).Centered(1200)
-                ).At(1, 50)
+                ).At(1, 50)</pre>
                 
 The "ToString()" method produces the following script:
+
 ^XA
 ^LH1,50
 ^FO1,150^ADN,84^FB1200,1,0,C
