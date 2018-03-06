@@ -83,6 +83,8 @@
     <Compile Include="ZPL\LabelBarcodeGenerator.cs" />
     <Compile Include="ZPL\LabelPosition.cs" />
     <Compile Include="ZPL\LabelTextGenerator.cs" />
+    <Compile Include="ZPL\PrintMode.cs" />
+    <Compile Include="ZPL\ZPLFonts.cs" />
     <Compile Include="ZPL\ZplLabel.cs" />
   </ItemGroup>
   <ItemGroup>

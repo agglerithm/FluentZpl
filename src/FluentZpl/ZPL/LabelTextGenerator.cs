@@ -7,10 +7,54 @@ namespace ZplLabels.ZPL
         private FontDefinition _font;
         private bool _underline;
 
-
+        /// <summary>
+        /// Set Textposition in Pixel
+        /// </summary>
+        /// <param name="fromLeft"></param>
+        /// <param name="fromTop"></param>
+        /// <returns></returns>
         public LabelTextGenerator At(int fromLeft, int fromTop)
         {
             _position = new LabelPosition(fromLeft, fromTop);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Textposition in milimeter
+        /// </summary>
+        /// <param name="dpiHelper"></param>
+        /// <param name="fromLeft"></param>
+        /// <param name="fromTop"></param>
+        /// <returns></returns>
+        public LabelTextGenerator At(ZplLabels.Utilities.DPIHelper dpiHelper, double fromLeft, double fromTop)
+        {
+            _position = new LabelPosition(dpiHelper.mmToPx(fromLeft), dpiHelper.mmToPx(fromTop));
+            return this;
+        }
+
+        /// <summary>
+        /// Set Textposition in Pixel
+        /// </summary>
+        /// <param name="fromLeft"></param>
+        /// <param name="fromTop"></param>
+        /// <returns></returns>
+        public LabelTextGenerator At(int fromLeft, int fromTop, LabelPosition.LabelAlignemnet alignment)
+        {
+            _position = new LabelPosition(fromLeft, fromTop, alignment);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Textposition in milimeter
+        /// </summary>
+        /// <param name="dpiHelper"></param>
+        /// <param name="fromLeft"></param>
+        /// <param name="fromTop"></param>
+        /// <returns></returns>
+        public LabelTextGenerator At(ZplLabels.Utilities.DPIHelper dpiHelper, double fromLeft, double fromTop,
+            LabelPosition.LabelAlignemnet alignment)
+        {
+            _position = new LabelPosition(dpiHelper.mmToPx(fromLeft), dpiHelper.mmToPx(fromTop), alignment);
             return this;
         }
 
@@ -22,14 +66,14 @@ namespace ZplLabels.ZPL
 
         public LabelTextGenerator Centered(int width)
         {
-            _block = new FieldBlock(width,1,FieldJustification.Center);
+            _block = new FieldBlock(width, 1, FieldJustification.Center);
             return this;
         }
 
         public LabelTextGenerator SetFont(string type, FieldOrientation orientation, int size)
         {
             _font = new FontDefinition(type, size);
-            _font.SetOrientation(orientation); 
+            _font.SetOrientation(orientation);
             return this;
         }
 
@@ -38,11 +82,12 @@ namespace ZplLabels.ZPL
             _underline = true;
             return this;
         }
+
         public override string ToString()
         {
             if (_position == null) throw new ApplicationException("Field position must be set for text generator");
             if (_data == null) throw new ApplicationException("Field data must be set for text generator");
-              
+
             return _position + getFont() + getBlock() + _script + _data + getUnderline();
         }
 
