@@ -11,11 +11,6 @@ namespace ZebraTests
     public class TestLabelOutput
     {
         private ZplLabel _label;
-        [TestFixtureSetUp]
-        public void SetUpForAllTests()
-        {
-
-        }
         [SetUp]
         public void SetUpForEachTest()
         {
@@ -44,12 +39,6 @@ namespace ZebraTests
 
         [TearDown]
         public void TearDownForEachTest()
-        {
-
-        }
-
-        [TestFixtureTearDown]
-        public void TearDownAfterAllTests()
         {
 
         }

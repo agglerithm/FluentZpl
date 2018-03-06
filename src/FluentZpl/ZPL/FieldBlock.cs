@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ZplLabels.ZPL
+﻿namespace ZplLabels.ZPL
 {
     public class FieldBlock 
     {
