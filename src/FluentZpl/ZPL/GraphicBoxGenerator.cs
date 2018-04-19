@@ -10,9 +10,55 @@
         {
             return string.Format("{0}^GB{1},{2},{3},{4}^FS\r\n", _position, _width, _height, _lineThickness, _color);
         }
+
+        /// <summary>
+        /// Set Graphic Box position in pixel
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public GraphicBoxGenerator At(int x, int y)
         {
             _position = new LabelPosition(x, y);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Graphic Box position in milimeter
+        /// </summary>
+        /// <param name="dpiHelper"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public GraphicBoxGenerator At(ZplLabels.Utilities.DPIHelper dpiHelper, double x, double y)
+        {
+            _position = new LabelPosition(dpiHelper.mmToPx(x), dpiHelper.mmToPx(y));
+            return this;
+        }
+
+        /// <summary>
+        /// Set Graphic Box position in pixel
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public GraphicBoxGenerator At(int x, int y, LabelPosition.LabelAlignemnet alignment)
+        {
+            _position = new LabelPosition(x, y, alignment);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Graphic Box position in milimeter
+        /// </summary>
+        /// <param name="dpiHelper"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public GraphicBoxGenerator At(ZplLabels.Utilities.DPIHelper dpiHelper, double x, double y,
+            LabelPosition.LabelAlignemnet alignment)
+        {
+            _position = new LabelPosition(dpiHelper.mmToPx(x), dpiHelper.mmToPx(y), alignment);
             return this;
         }
 
